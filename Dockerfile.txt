@@ -1,0 +1,30 @@
+# Lightweight API image for Bloomed Terminal
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# System deps (git for HF, and build basics)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git curl ca-certificates build-essential && \
+    rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy metadata and install deps first (better layer caching)
+COPY requirements.txt ./requirements.txt
+RUN python -m pip install --upgrade pip && \
+    pip install -r requirements.txt
+
+# Copy source
+COPY . .
+
+# Default model path can be overridden at runtime
+ENV MODEL_DIR="models/tinyllama" \
+    HOST="0.0.0.0" \
+    PORT="8000"
+
+EXPOSE 8000
+
+# Start API
+CMD ["uvicorn", "app.server:app", "--host", "0.0.0.0", "--port", "8000"]

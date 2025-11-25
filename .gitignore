@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+dist/
+build/
+*.egg-info/
+
+# Notebooks & data
+.ipynb_checkpoints/
+data/
+datasets/
+outputs/
+runs/
+checkpoints/
+models/
+artifacts/
+cache/
+wandb/
+
+# Env & secrets
+.env
+.env.*
+*.env
+
+# OS/IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Node (optional UI later)
+node_modules/

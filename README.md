@@ -96,7 +96,3 @@ Return:
 - isQuestion (boolean for ask mode)
 
 You can implement this with rules, a classifier, or an external service.
-
-## License
-
-Choose a license that fits your goals. This template ships without a license by default.
